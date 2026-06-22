@@ -1,0 +1,4 @@
+interface:
+  display_name: "SaveScope Game Pack Assistant"
+  short_description: "Guide Codex through SaveScope Game Pack creation and review."
+  default_prompt: "Help me create or review a SaveScope Game Pack."
