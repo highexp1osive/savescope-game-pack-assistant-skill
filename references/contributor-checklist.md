@@ -10,6 +10,7 @@ Use this checklist before saying a Game Pack is ready for maintainer review.
 - `adapter/index.mjs`
 - `samples/parser-output.example.json`
 - `data/` when the pack needs catalog, mapping, or guide data
+- `assets/` and `assets/attribution.json` when the pack includes distributable images
 - `reports/detail.report.json`
 - `reports/detail.report-data.json`
 - `tests/fixtures/*.case.json`
@@ -20,6 +21,7 @@ Use this checklist before saying a Game Pack is ready for maintainer review.
 - Current support scope.
 - Known limitations.
 - Data sources.
+- Asset sources and authorization when assets are included.
 - Validation commands run.
 - Safety statement: no real user saves, private exports, secrets, or unauthorized assets.
 - Author of the Game Pack.
@@ -32,6 +34,7 @@ Use this checklist before saying a Game Pack is ready for maintainer review.
 - Catalog data never proves current-save state.
 - Save mapping data needs parser output, fixture, or maintainer-reviewed evidence before it can support `supported`.
 - Guide/wiki summaries are reference data only unless separate parser evidence proves current-save state.
+- Image assets never prove current-save state or supported evidence.
 - Single-save observation never proves `supported`.
 - Half-verifiable collections should stay `catalog`, not partial completion.
 
@@ -42,6 +45,17 @@ Use this checklist before saying a Game Pack is ready for maintainer review.
 - Put route, quest, NPC, and wiki-derived structured summaries in `data/guides`.
 - Record source and authorization for catalog and guide data.
 - Do not copy long wiki text, private exports, or license-unclear source dumps.
+
+## Asset Rules
+
+- Prefer atmosphere/background and cover images first.
+- Add boss, item, NPC, or icon images only when rights are clear.
+- Put atmosphere/background images in `assets/backgrounds`.
+- Put cover images in `assets/cover`.
+- Put entity images in `assets/bosses`, `assets/items`, `assets/npcs`, or `assets/icons`.
+- Record source, author, license, or authorization in `assets/attribution.json`.
+- Mark generated images as `generated`.
+- Do not include unclear wiki/search/social images, external hotlinks, large source project files, or uncompressed videos.
 
 ## Minimum Review Handoff
 

@@ -34,7 +34,8 @@ Ask for:
 - Public data sources for catalogs, names, routes, or NPC/item lists.
 - Evidence for save mappings, such as fixture output, manual confirmation, or repeated before/after diffs.
 - Wiki, guide, route, or quest-note sources and redistribution permission.
-- Asset authorization.
+- Atmosphere/background or cover asset authorization.
+- Optional boss, item, NPC, or icon asset authorization.
 - Known encryption, compression, checksum, anti-cheat, cloud-save, or platform constraints.
 
 If input is thin, continue only as an experimental draft and keep features conservative.
@@ -69,9 +70,10 @@ Recommended edit order:
 3. `reports/detail.report-data.json`
 4. `reports/detail.report.json`
 5. `data/catalog`, `data/mappings`, or `data/guides` only when the report needs them
-6. `tests/fixtures/*.case.json`
-7. `parser/index.mjs`
-8. `README.md`
+6. `assets/backgrounds`, `assets/cover`, and `assets/attribution.json` only when distributable assets exist
+7. `tests/fixtures/*.case.json`
+8. `parser/index.mjs`
+9. `README.md`
 
 Data rules:
 
@@ -79,6 +81,13 @@ Data rules:
 - `data/mappings` is for save fields, flags, offsets, or enums and needs evidence before supporting `supported`.
 - `data/guides` is for sourced route, quest, NPC, or wiki-derived summaries and defaults to catalog/reference display.
 - Do not copy long wiki text or include license-unclear source dumps.
+
+Asset rules:
+
+- Prefer atmosphere/background and cover images before boss, item, NPC, or icon images.
+- Do not add images without source and redistribution rights.
+- Record every distributable asset in `assets/attribution.json`.
+- Images never prove current-save state.
 
 Run after small milestones:
 

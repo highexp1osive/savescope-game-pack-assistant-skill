@@ -20,6 +20,8 @@ Assume the working directory is a SaveScope app repository that contains `packag
 - Do not use `partial`; if only some items can be verified, keep the whole feature `catalog`, `planned`, or `unknown`.
 - Keep Game Pack data split into `data/catalog`, `data/mappings`, and `data/guides`; do not mix catalogs, save mappings, and wiki/guide notes into one database file.
 - Treat wiki/guide content as structured, sourced reference data only; do not copy long wiki text or use it as current-save evidence.
+- Prefer atmosphere/background and cover assets first; add boss, item, NPC, or icon assets only when source and redistribution rights are clear.
+- Require `assets/attribution.json` for distributable assets; images never prove current-save state or `supported` evidence.
 - Do not add React pages, CSS overrides, custom module types, or Core changes from a Game Pack.
 - Do not commit real user saves, private exports, access keys, unauthorized images, or `tests/.artifacts/`.
 
@@ -32,7 +34,7 @@ Assume the working directory is a SaveScope app repository that contains `packag
    npm run create:game-pack -- examples/game-packs/my-game --id my-game --name "My Game" --author "Contributor Name"
    ```
 
-3. Collect the minimum facts: target game, platform, version, public sample availability, before/after samples, known changes, catalog sources, save-mapping evidence, guide/wiki authorization, asset authorization, and any encryption/compression/checksum constraints.
+3. Collect the minimum facts: target game, platform, version, public sample availability, before/after samples, known changes, catalog sources, save-mapping evidence, guide/wiki authorization, atmosphere/cover asset authorization, optional entity asset authorization, and any encryption/compression/checksum constraints.
 4. Use `inspect:save` for a single save and `diff:saves` for before/after evidence. Treat their candidates as parser hypotheses until confirmed.
 5. Update the pack in this order: `samples/parser-output.example.json`, `adapter/index.mjs`, report data, report config, fixture cases, parser, README.
 6. After each meaningful change, run `validate:game-pack`.
@@ -73,6 +75,14 @@ Data evidence must stay separated:
 - `data/mappings` maps save fields, flags, offsets, or enums; it needs parser output, fixture, or maintainer-reviewed evidence before it can support `supported`.
 - `data/guides` stores route, quest, NPC, or wiki-derived structured summaries; it is reference/catalog content and does not count toward completion.
 
+Asset rules:
+
+- Put atmosphere/background art in `assets/backgrounds` and cover art in `assets/cover`.
+- Put optional entity art in `assets/bosses`, `assets/items`, `assets/npcs`, or `assets/icons`.
+- Every distributable asset needs source, author, license, or authorization in `assets/attribution.json`.
+- Generated images must be marked `generated`.
+- Do not use unclear wiki/search/social images, external hotlinks, large source project files, or uncompressed videos.
+
 ## Stop Conditions
 
 Stop automatic work and produce a contributor question when:
@@ -82,6 +92,7 @@ Stop automatic work and produce a contributor question when:
 - Save structure suggests encryption, compression, checksum, anti-cheat, or platform restrictions without a known handling path.
 - Data source or asset authorization is unclear.
 - Wiki/guide material has unclear source or redistribution rights.
+- Asset attribution is missing, asset rights are unclear, or an image is being used as save-state evidence.
 - Save mapping data lacks parser output, fixture, or manual-review evidence.
 - Fixture runner fails, review is blocked, or assistant check has `blockingStageIds`.
 - The pack contains real saves, private exports, secrets, unauthorized assets, or runner artifacts.
