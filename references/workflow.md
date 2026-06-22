@@ -32,6 +32,8 @@ Ask for:
 - Public sample availability.
 - Before/after samples and the exact known change in each pair.
 - Public data sources for catalogs, names, routes, or NPC/item lists.
+- Evidence for save mappings, such as fixture output, manual confirmation, or repeated before/after diffs.
+- Wiki, guide, route, or quest-note sources and redistribution permission.
 - Asset authorization.
 - Known encryption, compression, checksum, anti-cheat, cloud-save, or platform constraints.
 
@@ -66,9 +68,17 @@ Recommended edit order:
 2. `adapter/index.mjs`
 3. `reports/detail.report-data.json`
 4. `reports/detail.report.json`
-5. `tests/fixtures/*.case.json`
-6. `parser/index.mjs`
-7. `README.md`
+5. `data/catalog`, `data/mappings`, or `data/guides` only when the report needs them
+6. `tests/fixtures/*.case.json`
+7. `parser/index.mjs`
+8. `README.md`
+
+Data rules:
+
+- `data/catalog` is for game content directories and does not prove current-save state.
+- `data/mappings` is for save fields, flags, offsets, or enums and needs evidence before supporting `supported`.
+- `data/guides` is for sourced route, quest, NPC, or wiki-derived summaries and defaults to catalog/reference display.
+- Do not copy long wiki text or include license-unclear source dumps.
 
 Run after small milestones:
 

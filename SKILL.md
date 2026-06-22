@@ -18,6 +18,8 @@ Assume the working directory is a SaveScope app repository that contains `packag
 - The Game Pack author is the support-package/detail-page author, not the game developer.
 - Never upgrade a feature to `supported` from a single save, a guessed offset, wiki/catalog data, or one unconfirmed before/after diff.
 - Do not use `partial`; if only some items can be verified, keep the whole feature `catalog`, `planned`, or `unknown`.
+- Keep Game Pack data split into `data/catalog`, `data/mappings`, and `data/guides`; do not mix catalogs, save mappings, and wiki/guide notes into one database file.
+- Treat wiki/guide content as structured, sourced reference data only; do not copy long wiki text or use it as current-save evidence.
 - Do not add React pages, CSS overrides, custom module types, or Core changes from a Game Pack.
 - Do not commit real user saves, private exports, access keys, unauthorized images, or `tests/.artifacts/`.
 
@@ -30,7 +32,7 @@ Assume the working directory is a SaveScope app repository that contains `packag
    npm run create:game-pack -- examples/game-packs/my-game --id my-game --name "My Game" --author "Contributor Name"
    ```
 
-3. Collect the minimum facts: target game, platform, version, public sample availability, before/after samples, known changes, data sources, asset authorization, and any encryption/compression/checksum constraints.
+3. Collect the minimum facts: target game, platform, version, public sample availability, before/after samples, known changes, catalog sources, save-mapping evidence, guide/wiki authorization, asset authorization, and any encryption/compression/checksum constraints.
 4. Use `inspect:save` for a single save and `diff:saves` for before/after evidence. Treat their candidates as parser hypotheses until confirmed.
 5. Update the pack in this order: `samples/parser-output.example.json`, `adapter/index.mjs`, report data, report config, fixture cases, parser, README.
 6. After each meaningful change, run `validate:game-pack`.
@@ -65,6 +67,12 @@ Feature status must stay conservative:
 
 For contributor handoff and review readiness, use [contributor-checklist.md](references/contributor-checklist.md).
 
+Data evidence must stay separated:
+
+- `data/catalog` lists game content and never proves current-save state.
+- `data/mappings` maps save fields, flags, offsets, or enums; it needs parser output, fixture, or maintainer-reviewed evidence before it can support `supported`.
+- `data/guides` stores route, quest, NPC, or wiki-derived structured summaries; it is reference/catalog content and does not count toward completion.
+
 ## Stop Conditions
 
 Stop automatic work and produce a contributor question when:
@@ -73,6 +81,8 @@ Stop automatic work and produce a contributor question when:
 - A before/after candidate lacks a second confirming sample.
 - Save structure suggests encryption, compression, checksum, anti-cheat, or platform restrictions without a known handling path.
 - Data source or asset authorization is unclear.
+- Wiki/guide material has unclear source or redistribution rights.
+- Save mapping data lacks parser output, fixture, or manual-review evidence.
 - Fixture runner fails, review is blocked, or assistant check has `blockingStageIds`.
 - The pack contains real saves, private exports, secrets, unauthorized assets, or runner artifacts.
 

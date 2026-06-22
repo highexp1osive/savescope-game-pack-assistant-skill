@@ -9,6 +9,7 @@ Use this checklist before saying a Game Pack is ready for maintainer review.
 - `parser/index.mjs`
 - `adapter/index.mjs`
 - `samples/parser-output.example.json`
+- `data/` when the pack needs catalog, mapping, or guide data
 - `reports/detail.report.json`
 - `reports/detail.report-data.json`
 - `tests/fixtures/*.case.json`
@@ -29,8 +30,18 @@ Use this checklist before saying a Game Pack is ready for maintainer review.
 - Adapter fixtures prove adapter mapping only.
 - Parser fixtures prove save fixture -> parser output -> adapter -> report data.
 - Catalog data never proves current-save state.
+- Save mapping data needs parser output, fixture, or maintainer-reviewed evidence before it can support `supported`.
+- Guide/wiki summaries are reference data only unless separate parser evidence proves current-save state.
 - Single-save observation never proves `supported`.
 - Half-verifiable collections should stay `catalog`, not partial completion.
+
+## Data Rules
+
+- Put game content directories in `data/catalog`.
+- Put save fields, flags, offsets, and enum mappings in `data/mappings`.
+- Put route, quest, NPC, and wiki-derived structured summaries in `data/guides`.
+- Record source and authorization for catalog and guide data.
+- Do not copy long wiki text, private exports, or license-unclear source dumps.
 
 ## Minimum Review Handoff
 
